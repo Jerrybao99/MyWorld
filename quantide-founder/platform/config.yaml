@@ -1,0 +1,14 @@
+deepseek:
+  api_key: ${DEEPSEEK_API_KEY}
+  base_url: "https://api.deepseek.com"
+  model: "deepseek-chat"
+  max_retries: 3
+  timeout: 30
+
+filter:
+  min_paragraph_length: 20
+  annotation_marker: "🤖 观察者注"
+
+output:
+  max_retries: 3
+  retry_delay: 1
