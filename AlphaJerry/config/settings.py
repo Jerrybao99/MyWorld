@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
-DATA_DIR = BASE_DIR / "Data"
+DATA_DIR = BASE_DIR / "data"
 
 FINANCIAL_DIR = DATA_DIR / "财务"
 ANALYSIS_DIR = DATA_DIR / "分析"

@@ -17,16 +17,16 @@ def test_safe_divide_negative_denom():
 
 def test_calc_derived_indicators():
     df = pd.DataFrame([{
-        "TL": 100, "TA": 200, "CA": 50, "CL": 25,
-        "SE": 100, "NP": 30, "OP": 40, "Rev": 200,
-        "GP": 80, "InvP": 5, "OCF": 20,
+        "总负债": 100, "总资产": 200, "流动资产": 50, "流动负债": 25,
+        "股东权益": 100, "净利润": 30, "营业利润": 40, "主营收入": 200,
+        "主营利润": 80, "投资收益": 5, "经营现金流量": 20,
     }])
     result = calc_derived_indicators(df)
-    assert result.loc[0, "ALR"] == 50.0
-    assert result.loc[0, "CR"] == 2.0
-    assert result.loc[0, "EM"] == 2.0
-    assert result.loc[0, "NPR"] == 75.0
-    assert result.loc[0, "OPM"] == 40.0
-    assert result.loc[0, "NPM"] == 15.0
-    assert result.loc[0, "IPR"] == 12.5
-    assert result.loc[0, "CFR"] == 80.0
+    assert result.loc[0, "资产负债率"] == 50.0
+    assert result.loc[0, "流动比率"] == 2.0
+    assert result.loc[0, "权益乘数"] == 2.0
+    assert result.loc[0, "净利润占营业利润比"] == 75.0
+    assert result.loc[0, "主营利润率"] == 40.0
+    assert result.loc[0, "净利率"] == 15.0
+    assert result.loc[0, "投资收益占比"] == 12.5
+    assert result.loc[0, "现金流量比率"] == 80.0

@@ -18,17 +18,19 @@ def safe_divide(a, b):
 
 def calc_derived_indicators(df: pd.DataFrame) -> pd.DataFrame:
     df = df.copy()
-    df["ALR"] = df.apply(lambda r: safe_divide(r["TL"], r["TA"]), axis=1)
-    df["CR"] = df.apply(lambda r: safe_divide(r["CA"], r["CL"]), axis=1)
-    df["QR"] = df["CR"]
-    df["EM"] = df.apply(lambda r: safe_divide(r["TA"], r["SE"]), axis=1)
-    df["NPR"] = df.apply(lambda r: safe_divide(r["NP"], r["OP"]), axis=1)
-    df["OPM"] = df.apply(lambda r: safe_divide(r["GP"], r["Rev"]), axis=1)
-    df["NPM"] = df.apply(lambda r: safe_divide(r["NP"], r["Rev"]), axis=1)
-    df["IPR"] = df.apply(lambda r: safe_divide(r["InvP"], r["OP"]), axis=1)
-    df["CFR"] = df.apply(lambda r: safe_divide(r["OCF"], r["CL"]), axis=1)
-    df["EQ_TA"] = df.apply(lambda r: safe_divide(r["SE"], r["TA"]), axis=1)
+    df["资产负债率"] = df.apply(lambda r: safe_divide(r["总负债"], r["总资产"]), axis=1)
+    df["流动比率"] = df.apply(lambda r: safe_divide(r["流动资产"], r["流动负债"]), axis=1)
+    df["速动比率"] = df["流动比率"]
+    df["权益乘数"] = df.apply(lambda r: safe_divide(r["总资产"], r["股东权益"]), axis=1)
+    df["净利润占营业利润比"] = df.apply(lambda r: safe_divide(r["净利润"], r["营业利润"]), axis=1)
+    df["主营利润率"] = df.apply(lambda r: safe_divide(r["主营利润"], r["主营收入"]), axis=1)
+    df["净利率"] = df.apply(lambda r: safe_divide(r["净利润"], r["主营收入"]), axis=1)
+    df["投资收益占比"] = df.apply(lambda r: safe_divide(r["投资收益"], r["营业利润"]), axis=1)
+    df["现金流量比率"] = df.apply(lambda r: safe_divide(r["经营现金流量"], r["流动负债"]), axis=1)
+    df["股东权益比"] = df.apply(lambda r: safe_divide(r["股东权益"], r["总资产"]), axis=1)
+    df["销售毛利率"] = df.apply(lambda r: safe_divide(r["主营利润"], r["主营收入"]), axis=1)
+    df["净资产收益率"] = df.apply(lambda r: safe_divide(r["净利润"], r["股东权益"]), axis=1)
 
-    na_count = df[["ALR", "CR", "QR", "EM", "NPR", "OPM", "NPM", "IPR", "CFR"]].isna().sum(axis=1)
-    df["QualityFlag"] = na_count
+    na_count = df[["资产负债率", "流动比率", "速动比率", "权益乘数", "净利润占营业利润比", "主营利润率", "净利率", "投资收益占比", "现金流量比率", "销售毛利率", "净资产收益率"]].isna().sum(axis=1)
+    df["数据质量"] = na_count
     return df
